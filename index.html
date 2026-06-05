@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A M Nakul — ECE Student at Amrita Vishwa Vidyapeetham. VLSI Design, Embedded Systems, FPGA, Python, IoT. CGPA 9.03." />
+  <title>A M Nakul — ECE Student &amp; Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #00AA88;
+      --green-dark: #008A6E;
+      --green-light: #E1F5EE;
+      --green-text: #0F6E56;
+      --bg: #F5F7F6;
+      --card: #ffffff;
+      --border: #E4EAE7;
+      --text: #1A2420;
+      --muted: #6B7A75;
+      --accent: #FF6B35;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--green);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    /* ── HAMBURGER (mobile only) ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    /* Mobile nav drawer */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem 1rem;
+      gap: 0.75rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .mobile-menu a:hover { color: var(--green); }
+
+    /* ── PAGE ── */
+    .page {
+      max-width: 880px;
+      margin: 2rem auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* ── HERO HEADER ── */
+    .hero {
+      background: var(--green);
+      border-radius: 16px;
+      padding: 2rem 2rem 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -40px; top: -40px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 60px; bottom: -60px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .avatar-wrap {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 3px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-family: 'DM Serif Display', serif;
+      font-size: 32px;
+      color: #fff;
+      position: relative; z-index: 1;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
+    .hero-text .role {
+      font-size: 14px;
+      color: rgba(255,255,255,0.82);
+      margin-top: 3px;
+    }
+    .hero-text .location {
+      font-size: 13px;
+      color: rgba(255,255,255,0.62);
+      margin-top: 2px;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 12px;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 11.5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    /* ── GRID ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+    }
+    .card-label {
+      font-size: 10.5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ── INFO ROWS ── */
+    .info-row {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid #F0F4F2;
+      font-size: 13.5px;
+      align-items: flex-start;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row .lbl { color: var(--muted); min-width: 64px; flex-shrink: 0; font-size: 13px; }
+    .info-row a { color: var(--green); text-decoration: none; }
+    .info-row a:hover { text-decoration: underline; }
+
+    /* ── TAGS ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tag {
+      background: var(--green-light);
+      color: var(--green-text);
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .tag-gray {
+      background: #F0F2F1;
+      color: #4A5754;
+    }
+
+    /* ── STAT CARDS ── */
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--green);
+    }
+    .stat-lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── TIMELINE ── */
+    .timeline { display: flex; flex-direction: column; }
+    .trow {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0F4F2;
+      font-size: 13.5px;
+      align-items: start;
+    }
+    .trow:last-child { border-bottom: none; }
+    .tdate { color: var(--muted); font-size: 12.5px; padding-top: 2px; }
+    .trole strong { display: block; font-weight: 500; color: var(--text); font-size: 14px; }
+    .trole .torg { color: var(--muted); font-size: 12.5px; }
+    .trole ul { margin: 5px 0 0 14px; }
+    .trole ul li { color: var(--muted); font-size: 12.5px; margin-bottom: 2px; }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-text);
+      font-size: 10.5px;
+      font-weight: 500;
+      padding: 1px 7px;
+      border-radius: 10px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .badge-orange {
+      background: #FFF0EA;
+      color: #C44A10;
+    }
+
+    /* ── PUBLICATION ── */
+    .pub-card {
+      background: var(--green-light);
+      border: 1px solid #B2E0D2;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .pub-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--green-text);
+      line-height: 1.5;
+    }
+    .pub-venue {
+      font-size: 12.5px;
+      color: #2E8A6B;
+      margin-top: 5px;
+    }
+    .pub-bullets { margin: 8px 0 0 14px; }
+    .pub-bullets li { font-size: 12.5px; color: #3A7A63; margin-bottom: 2px; }
+
+    /* ── CERT ── */
+    .cert-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #F0F4F2;
+      font-size: 13.5px;
+    }
+    .cert-row:last-child { border-bottom: none; }
+    .cert-name { font-weight: 500; }
+    .cert-issuer { font-size: 12px; color: var(--muted); margin-top: 1px; }
+    .cert-date { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2rem;
+    }
+    footer a { color: var(--green); text-decoration: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 620px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.5rem; }
+      .two-col, .three-col { grid-template-columns: 1fr; }
+      .trow { grid-template-columns: 1fr; gap: 2px; }
+      .tdate { color: var(--green); font-size: 11.5px; }
+      .stat-num { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">A M Nakul</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="https://github.com/nakul152" target="_blank">GitHub ↗</a>
+    </div>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#experience" onclick="closeMenu()">Experience</a>
+    <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#publications" onclick="closeMenu()">Publications</a>
+    <a href="https://github.com/nakul152" target="_blank">GitHub ↗</a>
+  </div>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="hero" id="about">
+      <div class="avatar-wrap">N</div>
+      <div class="hero-text">
+        <h1>A M Nakul</h1>
+        <p class="role">B.Tech Electronics &amp; Communication Engineering · Amrita Vishwa Vidyapeetham</p>
+        <p class="location">📍 Thrissur, Kerala &nbsp;·&nbsp; CGPA 9.03 / 10</p>
+        <div class="hero-badges">
+          <span class="hero-badge">VLSI Design</span>
+          <span class="hero-badge">Embedded Systems</span>
+          <span class="hero-badge">Verilog</span>
+          <span class="hero-badge">FPGA</span>
+          <span class="hero-badge">Python</span>
+          <span class="hero-badge">IoT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="three-col">
+      <div class="stat-card">
+        <div class="stat-num">9.03</div>
+        <div class="stat-lbl">CGPA / 10</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-lbl">Projects completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1</div>
+        <div class="stat-lbl">Published paper</div>
+      </div>
+    </div>
+
+    <!-- CONTACT + SKILLS -->
+    <div class="two-col">
+      <div class="card">
+        <p class="card-label">Contact</p>
+        <div class="info-row"><span class="lbl">Email</span><a href="mailto:amnakul15@gmail.com">amnakul15@gmail.com</a></div>
+        <div class="info-row"><span class="lbl">Phone</span><span>+91 8075670375</span></div>
+        <div class="info-row"><span class="lbl">Location</span><span>Thrissur, Kerala</span></div>
+        <div class="info-row"><span class="lbl">GitHub</span><a href="https://github.com/nakul152" target="_blank">github.com/nakul152</a></div>
+      </div>
+      <div class="card">
+        <p class="card-label">Technical skills</p>
+        <div class="tags">
+          <span class="tag">Verilog</span>
+          <span class="tag">C</span>
+          <span class="tag">Python</span>
+          <span class="tag">VLSI Design</span>
+          <span class="tag">LTspice</span>
+          <span class="tag">Proteus</span>
+          <span class="tag">Vivado</span>
+          <span class="tag">Git</span>
+          <span class="tag">DSP</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">IoT</span>
+        </div>
+        <p class="card-label" style="margin-top:1rem;">Areas of interest</p>
+        <div class="tags">
+          <span class="tag tag-gray">Digital Electronics</span>
+          <span class="tag tag-gray">Analog Circuits</span>
+          <span class="tag tag-gray">Microcontrollers</span>
+          <span class="tag tag-gray">FPGA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="card" style="margin-bottom:1rem;" id="experience">
+      <p class="card-label">Work experience</p>
+      <div class="timeline">
+        <div class="trow">
+          <span class="tdate">Mar 2025 – Aug 2025 <span class="badge">current</span></span>
+          <div class="trole">
+            <strong>Project Intern</strong>
+            <span class="torg">Amrita Center for Wireless Networks &amp; Applications, Kollam, Kerala</span>
+            <ul>
+              <li>Developing edge data compression for real-time wireless sensor network monitoring.</li>
+              <li>Optimizing resource-constrained embedded systems for efficient data transmission.</li>
+              <li>Implementing hybrid lossless techniques for sampling, compressing, and decompressing big data.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="card" style="margin-bottom:1rem;">
+      <p class="card-label">Education</p>
+      <div class="timeline">
+        <div class="trow">
+          <span class="tdate">Oct 2022 – Present</span>
+          <div class="trole">
+            <strong>B.Tech — Electronics &amp; Communication Engineering <span class="badge">CGPA 9.03</span></strong>
+            <span class="torg">Amrita Vishwa Vidyapeetham, Amritapuri Campus · Kollam, Kerala</span>
+          </div>
+        </div>
+        <div class="trow">
+          <span class="tdate">Jun 2020 – Jul 2022</span>
+          <div class="trole">
+            <strong>Senior Secondary XII, Science — CBSE <span class="badge badge-orange">86.60%</span></strong>
+            <span class="torg">St Pauls Public School Kuriachira · Thrissur, Kerala</span>
+          </div>
+        </div>
+        <div class="trow">
+          <span class="tdate">May 2019 – Mar 2020</span>
+          <div class="trole">
+            <strong>Secondary X — CBSE <span class="badge badge-orange">90%</span></strong>
+            <span class="torg">Gurudeva Public School Varakkara · Thrissur, Kerala</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="card" style="margin-bottom:1rem;" id="projects">
+      <p class="card-label">Projects</p>
+      <div class="timeline">
+        <div class="trow">
+          <span class="tdate">May – Jun 2025</span>
+          <div class="trole">
+            <strong>High-Speed CMOS 6T SRAM Cell Design</strong>
+            <span class="torg">LTspice · VLSI Design · CMOS Technology</span>
+            <ul>
+              <li>Designed 6T SRAM cell using 16nm PTM CMOS models in LTspice.</li>
+              <li>Performed read/write simulations to measure delay, power, and stability.</li>
+              <li>Optimized transistor sizing to balance speed, power, and area (0.09 µm²).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="trow">
+          <span class="tdate">Dec 2024</span>
+          <div class="trole">
+            <strong>Digital Clock with Alarm and Reminder Display</strong>
+            <span class="torg">LPC2138 · Embedded C · Proteus</span>
+            <ul>
+              <li>Real-time digital clock with LCD, keypad, and RTC using LPC2138.</li>
+              <li>Alarm and medicine reminder via LCD and Bluetooth (HC-05) over UART.</li>
+              <li>Simulated and tested using Proteus and virtual COM port driver.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="trow">
+          <span class="tdate">Jun – Jul 2024</span>
+          <div class="trole">
+            <strong>EEG Spectrum Analysis in Frequency Domain</strong>
+            <span class="torg">MATLAB</span>
+            <ul>
+              <li>Analyzed synthetic EEG and gait data to study discomfort in prosthetic users.</li>
+              <li>Noise filtering, spectral decomposition, and pattern identification workflows.</li>
+              <li>Visualized correlations between brain activity and gait irregularities.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUBLICATION -->
+    <div class="card" style="margin-bottom:1rem;" id="publications">
+      <p class="card-label">Publications</p>
+      <div class="pub-card" style="margin-top:0.5rem; margin-bottom:0;">
+        <p class="pub-title">"A Comparative Study of Oxide Semiconductor Channels for Thin-Film Transistors"</p>
+        <p class="pub-venue">VSPICE 2026 · NMAM Institute of Technology, Nitte, Karnataka · Feb 2026</p>
+        <ul class="pub-bullets">
+          <li>TCAD-based comparative analysis of ZnO, IGZO, CdO, and CdZnO thin-film transistors.</li>
+          <li>Evaluated transfer and output characteristics to extract threshold voltage and field-effect mobility.</li>
+          <li>Analyzed impact of donor and acceptor trap density on device stability and performance.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="card" style="margin-bottom:1rem;">
+      <p class="card-label">Certifications</p>
+      <div class="cert-row">
+        <div>
+          <div class="cert-name">CCNA: Introduction to Networks</div>
+          <div class="cert-issuer">Cisco Networking Academy · Online</div>
+        </div>
+        <span class="cert-date">Apr – Sep 2025</span>
+      </div>
+      <div class="cert-row">
+        <div>
+          <div class="cert-name">Google Cybersecurity Certification</div>
+          <div class="cert-issuer">Coursera · Online</div>
+        </div>
+        <span class="cert-date">Sep – Oct 2023</span>
+      </div>
+    </div>
+
+    <!-- LANGUAGES & OUTREACH -->
+    <div class="two-col">
+      <div class="card">
+        <p class="card-label">Languages</p>
+        <div class="tags">
+          <span class="tag">English (Advanced)</span>
+          <span class="tag">Malayalam (Advanced)</span>
+          <span class="tag tag-gray">Hindi (Intermediate)</span>
+        </div>
+      </div>
+      <div class="card">
+        <p class="card-label">Community outreach</p>
+        <p style="font-size:13px; color:var(--muted);">
+          Hosted an awareness campaign on <em>"Importance of Health and Well-being"</em> for 7th &amp; 8th standard students at SVHSS Clappana, Kollam (Oct 2024) — Student Social Responsibility Project.
+        </p>
+      </div>
+    </div>
+
+    <footer style="margin-top:2rem;">
+      <p>A M Nakul · <a href="mailto:amnakul15@gmail.com">amnakul15@gmail.com</a> · <a href="https://github.com/nakul152" target="_blank">github.com/nakul152</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+  </script>
+</body>
+</html>

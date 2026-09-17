@@ -111,12 +111,19 @@
   }
   .info-row a:hover{ border-bottom-color:var(--accent); }
 
-  .avatar{
-    width:100%;
-    height:100%;
+  .photo-cell{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:20px;
+    background:var(--paper-raised);
+    border-left:1px solid var(--line);
+}
+.avatar{
+    width:150px;
+    height:185px;
     object-fit:cover;
     object-position:center top;
-    min-height:220px;
     background:linear-gradient(155deg,#123B33,#0F6E5C);
     display:flex;
     align-items:center;
@@ -125,8 +132,8 @@
     font-family:'Fraunces',serif;
     font-size:44px;
     font-weight:500;
-    border-left:1px solid var(--line);
-  }
+    border:1px solid var(--line);
+}
 
   /* ---------- Section list ---------- */
   .records{
@@ -397,8 +404,9 @@
     </div>
 
     <!-- Swap this .avatar block for <img src="your-photo.jpg" alt="A M Nakul" class="avatar"> to add a real photo -->
-    <img src="passportphoto.jpg" alt="A M Nakul" class="avatar">
-  </div>
+    <div class="photo-cell">
+  <img src="passportphoto.jpg" alt="A M Nakul" class="avatar">
+</div>
 
   <!-- ================= SECTIONS ================= -->
   <div class="records">

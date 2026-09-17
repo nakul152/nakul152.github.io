@@ -43,100 +43,78 @@
     background:var(--paper-raised);
     border:1px solid var(--line);
     border-radius:var(--radius);
-    padding:48px 48px 40px;
-    position:relative;
+    overflow:hidden;
     display:grid;
-    grid-template-columns:1fr 148px;
-    gap:40px;
-    align-items:start;
+    grid-template-columns:1fr 200px;
+    align-items:stretch;
   }
 
-  .eyebrow{
+  .header-main{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .name-bar{
+    background:var(--accent);
+    color:#F3FBF8;
+    padding:22px 28px;
+  }
+  .name-bar .eyebrow{
     font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    letter-spacing:0.04em;
-    color:var(--accent);
-    margin:0 0 14px;
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:#BFE7DB;
+    margin:0 0 6px;
   }
-
   h1.name{
     font-family:'Fraunces',serif;
     font-weight:500;
-    font-size:44px;
-    line-height:1.08;
-    margin:0 0 6px;
-    color:var(--ink);
-  }
-
-  .position{
-    font-size:17px;
-    color:var(--ink-soft);
-    margin:0 0 4px;
-  }
-
-  .location-line{
-    font-size:14px;
-    color:var(--muted);
-    margin:0 0 22px;
-  }
-
-  .trace{
-    width:100%;
-    height:14px;
-    margin:4px 0 26px;
-    display:block;
-  }
-  .trace path{
-    fill:none;
-    stroke:var(--line-strong);
-    stroke-width:1.5;
-  }
-  .trace circle{
-    fill:var(--accent);
-  }
-
-  .meta-grid{
-    display:grid;
-    grid-template-columns:120px 1fr;
-    row-gap:10px;
-    font-size:14.5px;
-  }
-  .meta-grid dt{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11.5px;
-    color:var(--muted);
-    letter-spacing:0.02em;
-    padding-top:2px;
-  }
-  .meta-grid dd{
+    font-size:32px;
+    line-height:1.1;
     margin:0;
-    color:var(--ink-soft);
+    color:#FFFFFF;
   }
-  .meta-grid a{
+
+  .info-rows{
+    display:flex;
+    flex-direction:column;
+  }
+  .info-row{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    border-top:1px solid var(--line);
+  }
+  .info-row:nth-child(odd){ background:var(--accent-soft); }
+  .info-row dt{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.02em;
+    color:var(--ink);
+    font-weight:500;
+    padding:13px 16px;
+    border-right:1px solid var(--line);
+    display:flex;
+    align-items:center;
+  }
+  .info-row dd{
+    margin:0;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    padding:13px 18px;
+    display:flex;
+    align-items:center;
+  }
+  .info-row a{
     color:var(--accent);
     text-decoration:none;
     border-bottom:1px solid transparent;
   }
-  .meta-grid a:hover{ border-bottom-color:var(--accent); }
-
-  .interest-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:2px;
-  }
-  .interest-tags span{
-    font-size:13px;
-    color:var(--accent);
-    background:var(--accent-soft);
-    padding:4px 10px;
-    border-radius:20px;
-  }
+  .info-row a:hover{ border-bottom-color:var(--accent); }
 
   .avatar{
-    width:148px;
-    height:148px;
-    border-radius:50%;
+    width:100%;
+    height:100%;
+    min-height:220px;
     background:linear-gradient(155deg,#123B33,#0F6E5C);
     display:flex;
     align-items:center;
@@ -145,7 +123,7 @@
     font-family:'Fraunces',serif;
     font-size:44px;
     font-weight:500;
-    border:1px solid var(--line);
+    border-left:1px solid var(--line);
   }
 
   /* ---------- Section list ---------- */
@@ -364,11 +342,12 @@
     .wrap{ padding:40px 16px 90px; }
     .header-card{
       grid-template-columns:1fr;
-      padding:32px 24px 28px;
     }
-    .avatar{ order:-1; width:84px; height:84px; font-size:28px; }
-    h1.name{ font-size:32px; }
-    .meta-grid{ grid-template-columns:96px 1fr; font-size:14px; }
+    .avatar{ order:-1; min-height:160px; font-size:32px; border-left:none; border-bottom:1px solid var(--line); }
+    h1.name{ font-size:26px; }
+    .info-row{ grid-template-columns:110px 1fr; }
+    .info-row dt{ font-size:11px; padding:11px 12px; }
+    .info-row dd{ font-size:13.5px; padding:11px 14px; }
     .section-body-inner{ padding-left:24px; }
     .tools-grid{ grid-template-columns:1fr; }
   }
@@ -384,46 +363,38 @@
 
   <!-- ================= HEADER ================= -->
   <div class="header-card">
-    <div>
-      <p class="eyebrow">FACULTY OF ENGINEERING — PROFILE</p>
-      <h1 class="name">A M Nakul</h1>
-      <p class="position">B.Tech Student, Electronics &amp; Communication Engineering</p>
-      <p class="location-line">Thrissur, Kerala, India</p>
+    <div class="header-main">
 
-      <svg class="trace" viewBox="0 0 400 14" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,7 H140 L154,1 H260 L274,13 H400"/>
-        <circle cx="140" cy="7" r="2.4"/>
-        <circle cx="274" cy="13" r="2.4"/>
-      </svg>
+      <div class="name-bar">
+        <p class="eyebrow">STUDENT — PROFILE</p>
+        <h1 class="name">A M Nakul</h1>
+      </div>
 
-      <dl class="meta-grid">
-        <dt>Education</dt>
-        <dd>B.Tech, Electronics &amp; Communication Engineering — Amrita Vishwa Vidyapeetham, Amritapuri (2022–2026, expected)</dd>
-
-        <dt>E-mail</dt>
-        <dd><a href="mailto:amnakul15@gmail.com">amnakul15@gmail.com</a></dd>
-
-        <dt>Phone</dt>
-        <dd>+91 8075670375</dd>
-
-        <dt>GitHub</dt>
-        <dd><a href="https://github.com/nakul152" target="_blank" rel="noopener">github.com/nakul152</a></dd>
-
-        <dt>Interests</dt>
-        <dd>
-          <div class="interest-tags">
-            <span>Digital Electronics</span>
-            <span>VLSI</span>
-            <span>Analog Circuits</span>
-            <span>Microcontrollers</span>
-            <span>Embedded Systems</span>
-            <span>Programming</span>
-          </div>
-        </dd>
+      <dl class="info-rows">
+        <div class="info-row">
+          <dt>Position</dt>
+          <dd>Graduate Student</dd>
+        </div>
+        <div class="info-row">
+          <dt>Education</dt>
+          <dd>B.Tech, Electronics &amp; Communication Engineering, Amrita Vishwa Vidyapeetham</dd>
+        </div>
+        <div class="info-row">
+          <dt>E-mail</dt>
+          <dd><a href="mailto:amnakul15@gmail.com">amnakul15@gmail.com</a></dd>
+        </div>
+        <div class="info-row">
+          <dt>Mobile No</dt>
+          <dd>+91 8075670375</dd>
+        </div>
+        <div class="info-row">
+          <dt>Major Field</dt>
+          <dd>Digital Electronics, VLSI, Analog Circuits, Microcontrollers, Embedded Systems and Programming.</dd>
+        </div>
       </dl>
     </div>
 
-    <!-- Swap this .avatar block for <img src="your-photo.jpg" alt="A M Nakul"> to add a real photo -->
+    <!-- Swap this .avatar block for <img src="your-photo.jpg" alt="A M Nakul" class="avatar"> to add a real photo -->
     <div class="avatar" aria-label="Photo placeholder">AN</div>
   </div>
 
